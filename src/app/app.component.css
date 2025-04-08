@@ -1,0 +1,9 @@
+.palavra {
+    letter-spacing: normal;
+}
+
+@media (min-width: 768px) {
+    .palavra {
+        letter-spacing: 0.3em;
+    }
+}

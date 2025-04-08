@@ -1,5 +1,8 @@
 <div class="flex flex-col items-center justify-center min-h-screen bg-yellow-50 p-4">
-  <h1 class="text-5xl font-extrabold tracking-[0.1em] text-pink-500 text-center mb-30">Fale uma palavra</h1>
+  <h1
+    class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-[0.1em] text-pink-500 text-center mb-30">
+    Fale uma palavra
+  </h1>
 
   <button (click)="reconhecerVoz()"
     class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
@@ -8,8 +11,8 @@
   </button>
 
 
-  <div *ngIf="palavra && palavra.trim() || true"
-    class="text-8xl font-extrabold tracking-[0.6em] text-pink-400 text-center mt-30">
+  <div *ngIf="palavra && palavra.trim()"
+    class="palavra text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold text-pink-400 text-center mt-30 flex">
     {{ palavra.toUpperCase() }}
   </div>
 </div>
