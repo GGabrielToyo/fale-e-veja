@@ -1,15 +1,18 @@
-<app-header></app-header>
-<div class="flex flex-col items-center justify-center">
-  <button (click)="reconhecerVoz()"
-    class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2">
-    <span class="text-2xl" *ngIf="!escutando">🎤 FALAR</span>
-    <span class="text-2xl" *ngIf="escutando">🎧 Escutando...</span>
-  </button>
+<div class="flex flex-col min-h-screen">
+  <app-header></app-header>
 
+  <main class="flex-1 flex flex-col items-center justify-center">
+    <button (click)="reconhecerVoz()"
+      class="text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:bg-gradient-to-l focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2">
+      <span class="text-2xl" *ngIf="!escutando">🎤 FALAR</span>
+      <span class="text-2xl" *ngIf="escutando">🎧 Escutando...</span>
+    </button>
 
-  <div *ngIf="palavra && palavra.trim()"
-    class="palavra text-4xl sm:text-6xl md:text-5xl lg:text-6xl font-extrabold text-pink-400 text-center mt-4 flex p-1 flex-wrap justify-center">
-    {{ palavra.toUpperCase() }}
-  </div>
+    <div *ngIf="palavra && palavra.trim()"
+      class="palavra text-4xl font-extrabold text-pink-400 text-center mt-4 flex flex-wrap justify-center p-1 mb-2">
+      {{ palavra.toUpperCase() }}
+    </div>
+  </main>
+
+  <app-footer></app-footer>
 </div>
-<app-footer></app-footer>
