@@ -27,6 +27,7 @@ export class AppComponent {
     } catch (error) {
       console.error('Erro ao escutar:', error);
       this.palavra = 'Erro ao escutar';
+      window.location.reload();
     } finally {
       this.escutando = false;
       this.cdr.detectChanges();
@@ -47,6 +48,7 @@ export class AppComponent {
 
       recognition.onerror = (event: any) => {
         reject(event.error);
+        window.location.reload();
       };
 
       recognition.onend = () => {
