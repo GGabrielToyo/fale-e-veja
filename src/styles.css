@@ -2,8 +2,9 @@
 
 html,
 body {
-    height: auto;
+    height: 100vh;
     overflow: auto;
+    @apply bg-yellow-50;
 }
 
 input,
