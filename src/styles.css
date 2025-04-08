@@ -28,3 +28,31 @@ app-root {
     isolation: isolate;
     font-family: 'Montserrat', sans-serif;
 }
+
+@keyframes pulseGlow {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes scalePulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.animate-scalePulse {
+    animation: scalePulse 1.5s ease-in-out infinite;
+}

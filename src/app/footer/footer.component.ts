@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
   standalone: true
 })
 export class FooterComponent {
-
+  linkedinUrl: string = 'https://www.linkedin.com/in/gabriel-alves-toyo-709b72205/';
 }
