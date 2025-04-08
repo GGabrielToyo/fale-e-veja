@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -14,27 +13,46 @@ export class AppComponent {
   palavra = '';
   escutando = false;
 
-  constructor() { }
+  constructor(private cdr: ChangeDetectorRef) { }
 
-  reconhecerVoz() {
+  async reconhecerVoz() {
     this.escutando = true;
+    this.cdr.detectChanges();
 
-    const recognition = new (window as any).webkitSpeechRecognition();
-    recognition.lang = 'pt-BR';
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-
-    recognition.start();
-
-    recognition.onresult = (event: any) => {
-      const texto = event.results[0][0].transcript;
-      this.palavra = texto;
-    };
-
-    recognition.onend = () => {
+    try {
+      const resultado = await this.escutarPalavra();
+      this.palavra = resultado;
+    } catch (error) {
+      console.error('Erro ao escutar:', error);
+      this.palavra = 'Erro ao escutar';
+    } finally {
       this.escutando = false;
-    };
-   
+      this.cdr.detectChanges();
+    }
+  }
+
+  escutarPalavra(): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const recognition = new (window as any).webkitSpeechRecognition();
+      recognition.lang = 'pt-BR';
+      recognition.interimResults = false;
+      recognition.maxAlternatives = 1;
+
+      recognition.onresult = (event: any) => {
+        const texto = event.results[0][0].transcript;
+        resolve(texto);
+      };
+
+      recognition.onerror = (event: any) => {
+        reject(event.error);
+      };
+
+      recognition.onend = () => {
+        // Não faz nada aqui, quem controla `escutando` é o `reconhecerVoz()`
+      };
+
+      recognition.start();
+    });
   }
 
 }
