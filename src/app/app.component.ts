@@ -1,11 +1,13 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
+import { FormsModule } from '@angular/forms';
+import { NumberService } from './core/services/number-service';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, HeaderComponent, FooterComponent],
+  imports: [CommonModule, HeaderComponent, FooterComponent, FormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   standalone: true,
@@ -13,9 +15,13 @@ import { FooterComponent } from './shared/footer/footer.component';
 export class AppComponent {
   title = 'fale-e-veja';
   palavra = '';
+  tipoSelecionado: 'numero' | 'letra' = 'letra';
   escutando = false;
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private numberService: NumberService
+  ) { }
 
   async reconhecerVoz() {
     this.escutando = true;
@@ -23,7 +29,12 @@ export class AppComponent {
 
     try {
       const resultado = await this.escutarPalavra();
-      this.palavra = resultado;
+      if(this.tipoSelecionado === 'numero') {
+        const numero = this.numberService.porExtensoParaNumero(resultado);
+        this.palavra = numero.toString();
+      } else {
+       this.palavra = resultado;
+      }
     } catch (error) {
       console.error('Erro ao escutar:', error);
       this.palavra = 'Erro ao escutar';
