@@ -29,11 +29,12 @@ export class AppComponent {
 
     try {
       const resultado = await this.escutarPalavra();
-      if(this.tipoSelecionado === 'numero') {
+      if (this.tipoSelecionado === 'numero') {
         const numero = this.numberService.porExtensoParaNumero(resultado);
         this.palavra = numero.toString();
       } else {
-       this.palavra = resultado;
+        //const numero = this.numberService.numeroParaExtenso(resultado);
+        this.palavra = resultado;
       }
     } catch (error) {
       console.error('Erro ao escutar:', error);
