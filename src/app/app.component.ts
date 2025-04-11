@@ -33,8 +33,12 @@ export class AppComponent {
         const numero = this.numberService.porExtensoParaNumero(resultado);
         this.palavra = numero.toString();
       } else {
-        //const numero = this.numberService.numeroParaExtenso(resultado);
-        this.palavra = resultado;
+        if (!isNaN(Number(resultado))) {
+          const numero = this.numberService.numeroParaExtenso(Number(resultado));
+          this.palavra = numero.toString();
+        } else {
+          this.palavra = resultado;
+        }
       }
     } catch (error) {
       console.error('Erro ao escutar:', error);
@@ -69,6 +73,22 @@ export class AppComponent {
 
       recognition.start();
     });
+  }
+
+  teste() {
+    const texto = '9 + 9';
+
+    if (this.tipoSelecionado === 'numero') {
+      const numero = this.numberService.porExtensoParaNumero(texto);
+      this.palavra = numero.toString();
+    } else {
+      if (!isNaN(Number(texto))) {
+        const numero = this.numberService.numeroParaExtenso(Number(texto));
+        this.palavra = numero.toString();
+      } else {
+        this.palavra = texto;
+      }
+    }
   }
 
 }

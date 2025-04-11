@@ -10,7 +10,6 @@ export class NumberService {
   porExtensoParaNumero(texto: string): number {
     if (!texto) return 0;
 
-    // Se já for um número (ex: "42"), apenas retorna como número
     const numeroDireto = Number(texto.replace(/[^\d]/g, ''));
     if (!isNaN(numeroDireto) && texto.trim().match(/^\d+$/)) {
       return numeroDireto;
@@ -51,6 +50,7 @@ export class NumberService {
       } else if (centenas[palavra] !== undefined) {
         atual += centenas[palavra];
       } else if (multiplicadores[palavra] !== undefined) {
+        if (atual === 0) atual = 1;
         atual *= multiplicadores[palavra];
         total += atual;
         atual = 0;
@@ -59,8 +59,6 @@ export class NumberService {
 
     return total + atual;
   }
-
-
 
   numeroParaExtenso(valor: number): string {
     if (isNaN(valor)) return '';
@@ -84,6 +82,7 @@ export class NumberService {
 
     if (valor === 100) return 'cem';
     if (valor === 0) return 'zero';
+    if (valor === 1000) return 'mil';
 
     let partes = [];
 
