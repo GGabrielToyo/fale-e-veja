@@ -76,7 +76,7 @@ export class AppComponent {
   }
 
   teste() {
-    const texto = '9 + 9';
+    const texto = '4 vezes 4';
 
     if (this.tipoSelecionado === 'numero') {
       const numero = this.numberService.porExtensoParaNumero(texto);
